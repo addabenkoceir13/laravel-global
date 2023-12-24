@@ -43,3 +43,34 @@ Data Tables
 >php artisan datatables:make UsersModel
 
         php artisan datatables:make Users
+
+#### How to impoter and  downloand data to excel 
+    > to needs install [Laravel Excel](https://docs.laravel-excel.com/3.1/getting-started/installation.html)
+
+
+- Installation
+
+        composer require maatwebsite/excel
+
+    >The Maatwebsite\Excel\ExcelServiceProvider is auto-discovered and registered by default. <br>
+    If you want to register it yourself, add the ServiceProvider in config/app.php:
+
+        'providers' => [
+            /*
+            * Package Service Providers...
+            */
+            Maatwebsite\Excel\ExcelServiceProvider::class,
+        ]
+    >The Excel facade is also auto-discovered.
+     If you want to add it manually, add the Facade in config/app.php:
+
+       'aliases' => [
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        ]
+    > To publish the config, run the vendor publish command:
+
+        php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
+
+#### #### How to impoter and  downloand PDF 
+
+- [Doc PDf](https://wkhtmltopdf.org/index.html)

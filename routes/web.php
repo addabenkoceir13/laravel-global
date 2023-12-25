@@ -2,6 +2,7 @@
 
 use App\DataTables\UsersDataTable;
 use App\Events\UserRegisterd;
+use App\Helpers\ImageFilter\ImageFilter;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Jobs\SendMail;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\ImageManager;
+use Intervention\Image\ImageManagerStatic;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +42,20 @@ Route::get('/dashboard', function (UsersDataTable $dataTable)
     return $dataTable->render('dashboard');
     // return view('dashboard', compact('users'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('image', function()
+{
+
+    // $img->filter(new ImageFilter());
+    // return $img->response();
+
+    // $img = ImageManagerStatic::make('choca.jpg');
+
+    // crop image
+    // $img->crop(400, 400);
+    // $img->save('chocav1.jpg');
+    // // return 'hello';
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

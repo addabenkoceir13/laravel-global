@@ -1,4 +1,4 @@
-Data Tables
+**Section 28**  Packages Data-Tables 
 ===============================
 ### Installation Yajra Laravel DataTables
 
@@ -71,6 +71,15 @@ Data Tables
 
         php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
 
-#### #### How to impoter and  downloand PDF 
+####  How to impoter and  downloand PDF 
 
 - [Doc PDf](https://wkhtmltopdf.org/index.html)
+
+**Section 29** Packages intervention Image
+===============================================================
+
+- [Doc intervention Image](https://image.intervention.io/v3)
+
+* Install Intervention Image with Composer by running the following command.
+
+      composer require intervention/image

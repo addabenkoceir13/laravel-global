@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\ImageManager;
 use Intervention\Image\ImageManagerStatic;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,6 +86,23 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('deleted-cart/{rowId}', [CartController::class, 'delete'])->name('deleted-cart');
     // Route::get('', [CartController::class,''])->name('');
 
+    Route::get('create-role', function()
+    {
+        // $role = Role::create(['name' => 'writer']);
+        // $permission = Permission::create(['name' => 'edit articles']);
+        // return $permission;
+        $user = auth()->user();
+        // $user->assignRole('writer');
+
+        if ($user->can('writer')) {
+            return 'user have permission';
+        }
+        else {
+            return 'user dont have permission';
+        }
+
+        return $user->permission;
+    });
 
 
 });

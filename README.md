@@ -101,3 +101,18 @@
 - after install shopping cart so install new package **laravel debugbar**
     
     - [Shopping cart package Laravel debugbar](https://github.com/barryvdh/laravel-debugbar)
+
+<br>
+<br>
+
+**Section** Package Spatie Laravel Permission
+================================================================
+- [Laravel Spatie](https://spatie.be/)
+- [Laravel Permission Doc](https://spatie.be/docs/laravel-permission/v6/introduction)
+
+
+        composer require spatie/laravel-permission
+
+<br>
+<br>
+

@@ -75,6 +75,9 @@
 
 - [Doc PDf](https://wkhtmltopdf.org/index.html)
 
+<br>
+<br>
+
 **Section 29** Packages intervention Image
 ===============================================================
 
@@ -83,3 +86,18 @@
 * Install Intervention Image with Composer by running the following command.
 
       composer require intervention/image
+<br>
+<br>
+
+**Section 30** Packages Shopping Cart 
+===============================================================
+
+- [Shopping cart package Laravel](https://github.com/bumbummen99/LaravelShoppingcart)
+
+        composer require bumbummen99/shoppingcart
+
+        php artisan vendor:publish --provider="Gloudemans\Shoppingcart\ShoppingcartServiceProvider" --tag="config"
+
+- after install shopping cart so install new package **laravel debugbar**
+    
+    - [Shopping cart package Laravel debugbar](https://github.com/barryvdh/laravel-debugbar)

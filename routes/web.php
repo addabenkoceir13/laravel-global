@@ -3,6 +3,7 @@
 use App\DataTables\UsersDataTable;
 use App\Events\UserRegisterd;
 use App\Helpers\ImageFilter\ImageFilter;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Jobs\SendMail;
@@ -73,6 +74,19 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/posts/{id}/force-delete', [PostController::class, 'forceDelete'])->name('posts.force_delete');
 
     Route::resource('posts', PostController::class);
+
+    Route::get('shop', [CartController::class, 'shop'])->name('shop');
+    Route::get('cart', [CartController::class, 'cart'])->name('cart');
+
+    Route::get('add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('add-to-cart');
+
+    Route::get('qty-increment/{rowId}', [CartController::class,'qtyIncrement'])->name('qty-increment');
+    Route::get('qty-decrement/{rowId}', [CartController::class,'qtyDecrement'])->name('qty-decrement');
+    Route::get('deleted-cart/{rowId}', [CartController::class, 'delete'])->name('deleted-cart');
+    // Route::get('', [CartController::class,''])->name('');
+
+
+
 });
 
 Route::get('send-mail', function(){
@@ -96,3 +110,5 @@ Route::get('greeting/{locale}', function($locale){
 
     return view('greeting');
 })->name('greeting');
+
+

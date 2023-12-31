@@ -17,6 +17,9 @@ use Intervention\Image\ImageManager;
 use Intervention\Image\ImageManagerStatic;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Laravel\Socialite\Facades\Socialite;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -129,4 +132,23 @@ Route::get('greeting/{locale}', function($locale){
     return view('greeting');
 })->name('greeting');
 
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+});
 
+Route::get('/auth/callback', function () {
+    $user = Socialite::driver('github')->user();
+
+    $user = User::firstOrCreate(
+        ['email' => $user->email],
+        [
+            'name' => $user->name,
+            'password' => bcrypt(Str::random(24))
+        ]
+    );
+
+    Auth::login($user, true);
+
+    return redirect('/dashboard');
+    // $user->token;
+});

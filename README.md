@@ -116,3 +116,48 @@
 <br>
 <br>
 
+**Section 32** Package Socialite social Authenication (social login)
+========================================================================
+
+<br>
+
+- [Laravel Social Doc ](https://laravel.com/docs/10.x/socialite#main-content)
+
+### Install Socialite for Laravel :
+
+    composer require laravel/socialite
+
+>These credentials should be placed in your application's config/services.php
+
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('GITHUB_REDIRECT_SECRET'),
+    ],
+
+> got to file **.env**
+
+    GITHUB_CLIENT_ID=
+    GITHUB_CLIENT_SECRET=
+    GITHUB_REDIRECT_SECRET=http://127.0.0.1:8000/auth/callback
+
+#### Authentication
+
+    use Laravel\Socialite\Facades\Socialite;
+ 
+    Route::get('/auth/redirect', function () {
+        return Socialite::driver('github')->redirect();
+    });
+ 
+    Route::get('/auth/callback', function () {
+        $user = Socialite::driver('github')->user();
+    
+        // $user->token
+    });
+ 
+- Create new OAuth apps
+- after creaéte you can use Client Id and Client secrets into .env
+
+[GitHub OAuth Apps - Create a new authorization application](https://github.com/settings/applications/new)
+
+

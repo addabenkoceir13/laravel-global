@@ -4,6 +4,7 @@ use App\DataTables\UsersDataTable;
 use App\Events\UserRegisterd;
 use App\Helpers\ImageFilter\ImageFilter;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentGateways\Paypal\PaypalController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Jobs\SendMail;
@@ -18,7 +19,7 @@ use Intervention\Image\ImageManagerStatic;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Laravel\Socialite\Facades\Socialite;
-
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +34,8 @@ use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', function ()
 {
-    return view('welcome');
-});
+    return view('home');
+})->name('/');
 
 Route::get('user/{id}/edit', function($id)
 {
@@ -97,14 +98,14 @@ Route::group(['middleware' => 'auth'], function(){
         $user = auth()->user();
         // $user->assignRole('writer');
 
-        if ($user->can('writer')) {
-            return 'user have permission';
-        }
-        else {
-            return 'user dont have permission';
-        }
+        // if ($user->can('writer')) {
+        //     return 'user have permission';
+        // }
+        // else {
+        //     return 'user dont have permission';
+        // }
 
-        return $user->permission;
+        // return $user->permission;
     });
 
 
@@ -152,3 +153,10 @@ Route::get('/auth/callback', function () {
     return redirect('/dashboard');
     // $user->token;
 });
+
+
+// this router for payment
+// Paypal
+Route::post('paypal/payment', [PaypalController::class, 'payment'])->name('paypal.payment');
+Route::get('paypal/success', [PaypalController::class, 'success'])->name('paypal.success');
+Route::get('paypal/cancel', [PaypalController::class, 'cancel'])->name('paypal.cancel');

@@ -298,3 +298,59 @@
         {
             return 'Payment faild';
         }
+
+<hr>
+
+### **2-** Installing the Stripe 
+
+* [Site Stripe](https://dashboard.stripe.com/test/apikeys)
+* [Github Stripe](https://github.com/stripe/stripe-php)
+* [Stripe test Card](https://stripe.com/docs/testing)
+**Getting Started**
+1. Add stripe to composer file : 
+
+        composer require stripe/stripe-php
+
+> after install create a new file in **config/stripe.php** and write this: 
+
+    <?php
+
+    return [
+        'pk' => env('STRIPE_PK'),
+        'sk' => env('STRIPE_SK'),
+    ];
+
+>After create file , add the following to your .env files .
+
+    STRIPE_PK=pk_test_51OX9AVLBNzlSIyXkQUX5e3bodfRf6dKcZNkSDB6IQPqhVnHX26kumxHARMcqQ0cV6aLudFNKjBnIK6O91s7vYBX100Upur9KpC
+    STRIPE_SK=sk_test_51OX9AVLBNzlSIyXk7T3eZ426Eur8AnOYe92iK3lHinADmRn3BT1voiQAVk2KhAgAX21foUOCPiWLeS2FKvJn3TSV00XQgOSXNT
+
+> so now create controller and create there function (payment, success, cancel)
+
+    public function payment(Request $request)
+    {
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
+
+        $response = \Stripe\Checkout\Session::create([
+            'line_items'  => [
+                [
+                    'price_data' => [
+                        'currency'     => 'usd',
+                        'product_data' => [
+                            'name' => 'gimme money!!!!',
+                        ],
+                        'unit_amount'  => $request->price * 100, // $40 = 4000
+                    ],
+                    'quantity'   => 1,
+                ],
+            ],
+
+            'mode'        => 'payment',
+            'success_url' => route('stripe.success'),
+            'cancel_url'  => route('stripe.cancel'),
+        ]);
+
+        return redirect()->away($response->url);
+    }
+
+![Alt text](<markdown/stripe payment.png>)

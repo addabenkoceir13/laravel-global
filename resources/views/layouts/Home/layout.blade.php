@@ -12,6 +12,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet" />
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body>
         <!-- Navigation-->
@@ -52,6 +54,31 @@
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; <a href="https://websolutionus.com/">websolutionus</a> {{date('Y')}}</p></div>
         </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if (session('status'))
+            <script>
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'success',
+                    text: "{{ session('status') }}",
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            </script>
+        @endif
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if (session('error'))
+            <script>
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'error',
+                    text: "{{ session('error') }}",
+                    showConfirmButton: false,
+                    timer: 5000
+                })
+            </script>
+        @endif
         <!-- Bootstrap core JS-->
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
